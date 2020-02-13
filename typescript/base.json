@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "outDir": "../dist",
+    "removeComments": true,
+    "target": "es6",
+    "skipLibCheck": true
+  },
+  "include": ["../src/**/*", "../test/**/*", "../types/**/*"]
+}

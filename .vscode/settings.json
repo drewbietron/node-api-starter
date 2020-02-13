@@ -1,0 +1,13 @@
+{
+  "eslint.options": {
+    "configFile": ".eslintrc"
+  },
+  "eslint.validate": ["javascript", "typescript"],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/dist": true
+  },
+  "eslint.enable": true
+}
