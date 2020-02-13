@@ -1,6 +1,5 @@
 import app from "./server/config";
-
-/**
+/*
  * Start Express server.
  */
 const server = app.listen(app.get("port"), () => {
