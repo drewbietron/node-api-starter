@@ -10,5 +10,5 @@
     "target": "es6",
     "skipLibCheck": true
   },
-  "include": ["../src/**/*", "../test/**/*", "../types/**/*"]
+  "include": ["../src/**/*", "node_modules"]
 }

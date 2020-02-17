@@ -1,12 +1,12 @@
 import { resolver } from "graphql-sequelize";
 import Sequelize from "sequelize";
-import { ApolloError } from "apollo-server-core";
+// import { ApolloError } from "apollo-server-core";
 
 export default function defaultResolver(model) {
   return resolver(model, {
     async before(options, args, context) {
       if (!context.user || !Object.keys(context.user).length) {
-        throw new ApolloError("Please login", "401");
+        // throw new ApolloError("Please login", "401");
       }
 
       // Default order of created_at -- graphql-sequelize will default

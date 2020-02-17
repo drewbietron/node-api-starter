@@ -21,6 +21,7 @@ export default class Authentication {
   }
 
   public authenticate() {
+    return this.handleReturn();
     const session = new Session({ token: this.req.headers.authorization });
     // Set res.locals to the current session so that the controllers
     // have access to the current user via `res.locals.session`

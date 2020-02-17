@@ -8,6 +8,15 @@ import defaultArgs from "./inputs/index";
 import defaultResolver from "./resolvers/index";
 
 const schema = new GraphQLSchema({
+  mutation: new GraphQLObjectType({
+    name: "RootMutationType",
+    fields: {
+      user: {
+        type: new GraphQLList(user),
+        args: defaultArgs
+      }
+    }
+  }),
   query: new GraphQLObjectType({
     name: "RootQueryType",
     fields: {
