@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import Session from "./session";
+import { Request, Response, NextFunction } from 'express';
+import Session from './session';
 
 interface IAuthenticationOptions {
   req: Request;
@@ -7,7 +7,7 @@ interface IAuthenticationOptions {
   next: NextFunction;
 }
 
-export const authenticatedPaths = ["/authenticated"];
+export const authenticatedPaths = ['/authenticated'];
 
 export default class Authentication {
   public req: Request;
@@ -21,7 +21,6 @@ export default class Authentication {
   }
 
   public authenticate() {
-    return this.handleReturn();
     const session = new Session({ token: this.req.headers.authorization });
     // Set res.locals to the current session so that the controllers
     // have access to the current user via `res.locals.session`
