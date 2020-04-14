@@ -1,5 +1,6 @@
-import { Sequelize } from 'sequelize';
-import { config, configOptions } from './config';
+import { Sequelize } from "sequelize";
+import { config, configOptions } from "./config";
+
 export interface IDefaultModel {
   id: number;
   uuid: string;
@@ -8,7 +9,7 @@ export interface IDefaultModel {
 }
 
 export const database = new Sequelize(config.url, {
-  ...configOptions,
+  ...configOptions
 });
 
 export default database;

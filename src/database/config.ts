@@ -1,6 +1,5 @@
 import Sequelize from "sequelize";
 import Environment from "../environment";
-
 import databaseLogger from "./logs";
 
 new Environment(process.env.NODE_ENV).init();
