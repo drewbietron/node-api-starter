@@ -1,16 +1,16 @@
-import { resolver } from 'graphql-sequelize';
-import Sequelize from 'sequelize';
-import { ApolloError } from 'apollo-server-core';
+import { resolver } from "graphql-sequelize";
+import Sequelize from "sequelize";
+// import { ApolloError } from 'apollo-server-core';
 
 export default function defaultResolver(model) {
   return resolver(model, {
     async before(options, args, context) {
-      console.log('options', options);
-      console.log('args', args);
-      console.log('context', context);
-      if (!context.user || !Object.keys(context.user).length) {
-        throw new ApolloError('Please login', '401');
-      }
+      // console.log("options", options);
+      // console.log("args", args);
+      // console.log("context", context);
+      // if (!context.user || !Object.keys(context.user).length) {
+      //   throw new ApolloError('Please login', '401');
+      // }
 
       // Default order of created_at -- graphql-sequelize will default
       // to sorting by primary key which is UUID.  Since UUID's aren't
@@ -18,13 +18,13 @@ export default function defaultResolver(model) {
       // good reason to default sort by uuid, well use created_at
       const updatedOptions = {
         ...options,
-        order: Sequelize.literal('created_at DESC'),
+        order: Sequelize.literal("created_at DESC")
       };
 
       return updatedOptions;
     },
     after: result => {
       return result;
-    },
+    }
   });
 }
