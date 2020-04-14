@@ -9,7 +9,7 @@ jobs:
           NODE_ENV: test
       - image: mdillon/postgis:9.5
         environment:
-          POSTGRES_DB: test
+          POSTGRES_DB: api_starter_test
           POSTGRES_PASSWORD: ""
           POSTGRES_USER: user
           JTW_SECRET: secret
