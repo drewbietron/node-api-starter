@@ -19,14 +19,14 @@ const schema = new GraphQLSchema({
     name: "RootMutationType",
     fields: {
       createUser: {
-        type: new GraphQLList(user),
+        type: user,
         args: createUserArgs,
         resolve: (root, args) => createUser(args)
       },
       updateUser: {
-        type: new GraphQLList(user),
+        type: user,
         args: updateUserArgs,
-        resolve: (root, args) => updateUser(args)
+        resolve: (root, args, context) => updateUser(args, context.user)
       }
     }
   }),
@@ -38,7 +38,7 @@ const schema = new GraphQLSchema({
         args: defaultArgs,
         resolve: defaultResolver(User)
       },
-      my: {
+      me: {
         type: user,
         resolve: (root, args, context) => context.user
       }

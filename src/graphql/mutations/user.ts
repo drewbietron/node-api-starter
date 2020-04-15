@@ -9,9 +9,6 @@ import { ApolloError } from "apollo-server-core";
 import User from "../../database/models/user";
 
 export const updateUserArgs: GraphQLFieldConfigArgumentMap = {
-  uuid: {
-    type: new GraphQLNonNull(GraphQLID)
-  },
   firstName: {
     type: GraphQLString
   },
@@ -38,15 +35,15 @@ export const createUserArgs: GraphQLFieldConfigArgumentMap = {
   }
 };
 
-export async function updateUser(args) {
+export async function updateUser(args, user) {
+  console.log("using user1", user);
   let properties = {};
-  let user;
   Object.keys(args).forEach(k => {
     properties = { ...properties, [k]: args[k] };
   });
 
   try {
-    user = await User.update(properties, {
+    await user.update(properties, {
       where: {
         uuid: args.uuid
       },
@@ -56,7 +53,7 @@ export async function updateUser(args) {
     throw new ApolloError(e, "500");
   }
 
-  return user[1];
+  return user;
 }
 
 export async function createUser(args) {
@@ -68,5 +65,5 @@ export async function createUser(args) {
     throw new ApolloError(e, "500");
   }
 
-  return [user];
+  return user;
 }

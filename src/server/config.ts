@@ -21,6 +21,7 @@ import database from "../database/database";
 
 // Set up environment variables
 import Environment from "../environment";
+import User from "../database/models/user";
 
 new Environment(process.env.NODE_ENV).init();
 
