@@ -16,10 +16,9 @@ jobs:
     steps:
       - checkout
       - run: |
-          cd api/ &&
           yarn &&
           yarn build &&
-          yarn test-ci
+          yarn test
 workflows:
   version: 2
   api:
