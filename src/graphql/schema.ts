@@ -40,7 +40,7 @@ const schema = new GraphQLSchema({
       },
       my: {
         type: user,
-        resolve: (root, args, context, info) => context.user
+        resolve: (root, args, context) => context.user
       }
     }
   })

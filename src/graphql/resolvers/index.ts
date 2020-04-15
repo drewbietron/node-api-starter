@@ -4,10 +4,8 @@ import Sequelize from "sequelize";
 
 export default function defaultResolver(model) {
   return resolver(model, {
-    async before(options, args, context) {
-      // console.log("options", options);
-      // console.log("args", args);
-      // console.log("context", context);
+    // before (option, args, context)
+    async before(options) {
       // if (!context.user || !Object.keys(context.user).length) {
       //   throw new ApolloError('Please login', '401');
       // }

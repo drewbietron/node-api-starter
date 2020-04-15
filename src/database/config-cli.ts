@@ -21,6 +21,7 @@ module.exports = {
   }
 };
 
+// eslint-disable-next-line no-console
 console.log(
   `CLI is using ${process.env.DATABASE_URL} in NODE_ENV=${process.env.NODE_ENV}`
 );
