@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rm -rf dist; ./node_modules/typescript/bin/tsc --p ./typescript/production.json;",
     "lint": "./node_modules/.bin/eslint src/**/**/*.ts test/**/**/*.ts",
-    "start": "NODE_ENV=development ts-node src/index.ts",
+    "start": "ts-node src/index.ts",
+    "start-dev": "ts-node-dev src/index.ts --watch",
     "db": "./node_modules/.bin/sequelize-cli --config=./dist/database/config-cli.js",
     "pretest": "rm -rf dist/; NODE_ENV=test ./node_modules/typescript/bin/tsc; NODE_ENV=test yarn db db:drop; NODE_ENV=test yarn db db:create; NODE_ENV=test yarn run-migrations;",
     "test": "yarn lint; jest --forceExit --coverage --verbose --detectOpenHandles --runInBand",
@@ -58,6 +59,7 @@
     "sequelize-cli": "^5.5.1",
     "ts-jest": "^25.2.0",
     "ts-node": "^8.6.2",
+    "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.7.5"
   }
 }

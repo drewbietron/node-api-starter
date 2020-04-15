@@ -7,16 +7,26 @@ import user from "./nodes/user";
 import defaultArgs from "./inputs/index";
 import defaultResolver from "./resolvers/index";
 
-import { userMutationArgs, mutateUser } from "./mutations/user";
+import {
+  createUserArgs,
+  createUser,
+  updateUserArgs,
+  updateUser
+} from "./mutations/user";
 
 const schema = new GraphQLSchema({
   mutation: new GraphQLObjectType({
     name: "RootMutationType",
     fields: {
-      user: {
+      createUser: {
         type: new GraphQLList(user),
-        args: userMutationArgs,
-        resolve: (root, args, context, info) => mutateUser(args)
+        args: createUserArgs,
+        resolve: (root, args) => createUser(args)
+      },
+      updateUser: {
+        type: new GraphQLList(user),
+        args: updateUserArgs,
+        resolve: (root, args) => updateUser(args)
       }
     }
   }),

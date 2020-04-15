@@ -8,7 +8,7 @@ import { ApolloError } from "apollo-server-core";
 
 import User from "../../database/models/user";
 
-export const userMutationArgs: GraphQLFieldConfigArgumentMap = {
+export const updateUserArgs: GraphQLFieldConfigArgumentMap = {
   uuid: {
     type: new GraphQLNonNull(GraphQLID)
   },
@@ -23,7 +23,22 @@ export const userMutationArgs: GraphQLFieldConfigArgumentMap = {
   }
 };
 
-export async function mutateUser(args) {
+export const createUserArgs: GraphQLFieldConfigArgumentMap = {
+  firstName: {
+    type: GraphQLString
+  },
+  lastName: {
+    type: GraphQLString
+  },
+  email: {
+    type: GraphQLString
+  },
+  password: {
+    type: GraphQLString
+  }
+};
+
+export async function updateUser(args) {
   let properties = {};
   let user;
   Object.keys(args).forEach(k => {
@@ -42,4 +57,16 @@ export async function mutateUser(args) {
   }
 
   return user[1];
+}
+
+export async function createUser(args) {
+  let user: User;
+
+  try {
+    user = await User.create(args);
+  } catch (e) {
+    throw new ApolloError(e, "500");
+  }
+
+  return [user];
 }

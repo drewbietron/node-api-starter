@@ -49,7 +49,6 @@ const graphql = new ApolloServer({
   introspection: true,
   context: async ({ req }) => {
     const token = req.headers.authorization || "";
-    console.log("token", token);
     const user = await new Session({
       token
     }).currentUser();
