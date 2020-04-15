@@ -1,11 +1,11 @@
 import { Request } from "jest-express/lib/request";
 import { Response } from "jest-express/lib/response";
-import createUser from "../../fabricators/user";
-import Session from "../../../src/server/middleware/session";
+import createUser from "../../../fabricators/user";
+import Session from "../../../../src/lib/session";
 
 import Authentication, {
   authenticatedPaths
-} from "../../../src/server/middleware/authentication";
+} from "../../../../src/server/middleware/authentication";
 
 describe("authentication middleware", () => {
   function mockResponse(): any {

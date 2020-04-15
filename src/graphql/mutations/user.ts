@@ -1,9 +1,4 @@
-import {
-  GraphQLID,
-  GraphQLNonNull,
-  GraphQLString,
-  GraphQLFieldConfigArgumentMap
-} from "graphql";
+import { GraphQLString, GraphQLFieldConfigArgumentMap } from "graphql";
 import { ApolloError } from "apollo-server-core";
 
 import User from "../../database/models/user";
@@ -36,7 +31,6 @@ export const createUserArgs: GraphQLFieldConfigArgumentMap = {
 };
 
 export async function updateUser(args, user) {
-  console.log("using user1", user);
   let properties = {};
   Object.keys(args).forEach(k => {
     properties = { ...properties, [k]: args[k] };

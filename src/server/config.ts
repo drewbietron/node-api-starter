@@ -10,18 +10,18 @@ import { resolver } from "graphql-sequelize";
 // Routes
 import index from "./routes/index";
 import health from "./routes/health";
+import session from "./routes/session";
 
 // Graphql Schema
 import schema from "../graphql/schema";
 
 // Middlewares
 // import Authentication from "./middleware/authentication";
-import Session from "./middleware/session";
+import Session from "../lib/session";
 import database from "../database/database";
 
 // Set up environment variables
 import Environment from "../environment";
-import User from "../database/models/user";
 
 new Environment(process.env.NODE_ENV).init();
 
@@ -83,5 +83,10 @@ graphql.applyMiddleware({ app, path: "/__gql__" });
 
 app.get("/", index);
 app.get("/_health", health);
+
+app.post("/session/login", session.login);
+app.post("/session/signup", session.signUp);
+app.post("/session/password-reset", session.passwordReset);
+app.get("/session/validate", session.validateSession);
 
 export default app;

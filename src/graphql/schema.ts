@@ -13,6 +13,13 @@ import {
   updateUserArgs,
   updateUser
 } from "./mutations/user";
+import {
+  loginUserArgs,
+  loginUser,
+  signUpUserArgs,
+  signUpUser
+} from "./mutations/session";
+import { session } from "./nodes/session";
 
 const schema = new GraphQLSchema({
   mutation: new GraphQLObjectType({
@@ -27,6 +34,16 @@ const schema = new GraphQLSchema({
         type: user,
         args: updateUserArgs,
         resolve: (root, args, context) => updateUser(args, context.user)
+      },
+      loginUser: {
+        type: session,
+        args: loginUserArgs,
+        resolve: (root, args) => loginUser(args)
+      },
+      signUpUser: {
+        type: session,
+        args: signUpUserArgs,
+        resolve: (root, args) => signUpUser(args)
       }
     }
   }),
