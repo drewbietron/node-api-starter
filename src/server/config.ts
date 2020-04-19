@@ -49,15 +49,6 @@ const graphql = new ApolloServer({
   playground: true,
   introspection: true,
   context: async ({ req }) => {
-    // const token = req.headers.authorization || "";
-    // let user;
-
-    // if (!user) {
-    //   user = await new Session({
-    //     token,
-    //   }).currentUser();
-    // }
-
     // https://github.com/mickhansen/graphql-sequelize/issues/656
     const dataloader = createContext(database);
     resolver.contextToOptions = {
@@ -66,7 +57,6 @@ const graphql = new ApolloServer({
     };
 
     return {
-      // user,
       headers: req.headers,
       dataloader,
     };
