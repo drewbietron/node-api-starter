@@ -1,2 +1,2 @@
 release: make
-web: node ../app/dist/server.js
+web: node dist/index.js
