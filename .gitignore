@@ -2,3 +2,12 @@ node_modules
 coverage
 dist
 .env.production
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.pnp.*
