@@ -1,2 +1,2 @@
 release: make
-web: node dist/index.js
+web: node src/index.ts
