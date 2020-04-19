@@ -30,15 +30,19 @@ export default class PasswordReset {
             {
               to: this.email,
               dynamic_template_data: {
-                token
-              }
-            }
-          ]
+                token,
+              },
+            },
+          ],
         },
         EEmailTemplates.RESET_PASSWORD
       ).send();
 
-      return this.options.res.status(201).json();
+      return this.options.res
+        .status(201)
+        .json(
+          "Check your email for instructions to reset your password. Don't forget to check your spam folder, and un-spam filter us if we're in there. 😉"
+        );
     } catch (error) {
       if (error.status === 404) {
         return this.options.res.status(404).json(error.message);

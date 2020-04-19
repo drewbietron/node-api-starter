@@ -17,7 +17,6 @@ import schema from "../graphql/schema";
 
 // Middlewares
 import Authentication from "./middleware/authentication";
-import Session from "../lib/session";
 import database from "../database/database";
 
 // Set up environment variables
@@ -44,7 +43,7 @@ app.use(errorHandler());
 /*
  * GraphQL
  */
-const graphql = new ApolloServer({
+export const apolloConfig = {
   schema,
   playground: true,
   introspection: true,
@@ -64,7 +63,8 @@ const graphql = new ApolloServer({
   engine: {
     apiKey: process.env.APOLLO_ENGINE_API_KEY,
   },
-});
+};
+export const graphql = new ApolloServer(apolloConfig);
 graphql.applyMiddleware({ app, path: "/__gql__" });
 // Set up authenicated requests.  Routes that need to be authenicated
 // can be added within middlewares/authentication

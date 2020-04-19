@@ -35,7 +35,7 @@ async function login(req: Request, res: Response) {
 
     return res.status(200).json({
       token: await userSession.generateToken(),
-      currentUser: await userSession.currentUser(user.uuid)
+      currentUser: await userSession.currentUser(user.uuid),
     });
   } catch (error) {
     return res.status(500).json(error);
@@ -68,12 +68,12 @@ async function signUp(req: Request, res: Response) {
       return res.status(200).json({
         existingUser: true,
         token: await userSession.generateToken(),
-        currentUser: await userSession.currentUser(existingUser.uuid)
+        currentUser: await userSession.currentUser(existingUser.uuid),
       });
     }
 
     return res.status(401).json({
-      error: `${req.body.email} already exists, but we couldn't login that account with the password you have provided.`
+      error: `${req.body.email} already exists, but we couldn't login that account with the password you have provided.`,
     });
   }
 
@@ -82,14 +82,14 @@ async function signUp(req: Request, res: Response) {
       firstName: req.body.first_name,
       lastName: req.body.last_name,
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
     });
 
     const userSession = await new Session({ user });
 
     return res.status(200).json({
       token: await userSession.generateToken(),
-      currentUser: await userSession.currentUser(user.uuid)
+      currentUser: await userSession.currentUser(user.uuid),
     });
   } catch (error) {
     return res.status(401).json({ error });
@@ -112,7 +112,7 @@ async function validateSession(req: Request, res: Response) {
 
   return res.status(200).json({
     token: userSession.formattedToken,
-    currentUser: await userSession.currentUser()
+    currentUser: await userSession.currentUser(),
   });
 }
 
@@ -121,12 +121,7 @@ async function passwordReset(req: Request, res: Response) {
     return res.status(401).json({ error: "Please enter an e-mail" });
   }
 
-  new PasswordReset({ req, res }).sendEmail();
-
-  return res.status(200).json({
-    message:
-      "Check your email for instructions to reset your password. Don't forget to check your spam folder, and un-spam filter us if we're in there. 😉"
-  });
+  return new PasswordReset({ req, res }).sendEmail();
 }
 
 export default { login, signUp, validateSession, passwordReset };
