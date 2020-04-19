@@ -6,6 +6,6 @@ describe("schema fields", () => {
   });
 
   it("includes 'me'", async () => {
-    expect(schema.getQueryType().getFields().users).toBeDefined();
+    expect(schema.getQueryType().getFields().me).toBeDefined();
   });
 });
