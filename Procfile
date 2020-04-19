@@ -1,2 +1,2 @@
 release: make
-web: node foo/dist/server.js
+web: node ../dist/server.js
