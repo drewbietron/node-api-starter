@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from 'express';
-import Session from './session';
+import { Request, Response, NextFunction } from "express";
+import Session from "../../lib/session";
 
 interface IAuthenticationOptions {
   req: Request;
@@ -7,7 +7,7 @@ interface IAuthenticationOptions {
   next: NextFunction;
 }
 
-export const authenticatedPaths = ['/authenticated'];
+export const authenticatedPaths = ["/authenticated"];
 
 export default class Authentication {
   public req: Request;

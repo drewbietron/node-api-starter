@@ -1,45 +1,34 @@
-import {
-  GraphQLID,
-  GraphQLNonNull,
-  GraphQLString,
-  GraphQLFieldConfigArgumentMap
-} from "graphql";
+import { GraphQLString, GraphQLFieldConfigArgumentMap } from "graphql";
 import { ApolloError } from "apollo-server-core";
 
-import User from "../../database/models/user";
-
-export const userMutationArgs: GraphQLFieldConfigArgumentMap = {
-  uuid: {
-    type: new GraphQLNonNull(GraphQLID)
-  },
+export const updateUserArgs: GraphQLFieldConfigArgumentMap = {
   firstName: {
-    type: GraphQLString
+    type: GraphQLString,
   },
   lastName: {
-    type: GraphQLString
+    type: GraphQLString,
   },
   email: {
-    type: GraphQLString
-  }
+    type: GraphQLString,
+  },
 };
 
-export async function mutateUser(args) {
+export async function updateUser(args, user) {
   let properties = {};
-  let user;
-  Object.keys(args).forEach(k => {
+  Object.keys(args).forEach((k) => {
     properties = { ...properties, [k]: args[k] };
   });
 
   try {
-    user = await User.update(properties, {
+    await user.update(properties, {
       where: {
-        uuid: args.uuid
+        uuid: args.uuid,
       },
-      returning: true
+      returning: true,
     });
   } catch (e) {
     throw new ApolloError(e, "500");
   }
 
-  return user[1];
+  return user;
 }

@@ -7,18 +7,39 @@ import user from "./nodes/user";
 import defaultArgs from "./inputs/index";
 import defaultResolver from "./resolvers/index";
 
-import { userMutationArgs, mutateUser } from "./mutations/user";
+import { updateUserArgs, updateUser } from "./mutations/user";
+import {
+  loginUserArgs,
+  loginUser,
+  signUpUserArgs,
+  signUpUser,
+} from "./mutations/session";
+import { session } from "./nodes/session";
+import withCurrentUser from "./resolvers/authenticated";
 
 const schema = new GraphQLSchema({
   mutation: new GraphQLObjectType({
     name: "RootMutationType",
     fields: {
-      user: {
-        type: new GraphQLList(user),
-        args: userMutationArgs,
-        resolve: (root, args, context, info) => mutateUser(args)
-      }
-    }
+      updateUser: {
+        type: user,
+        args: updateUserArgs,
+        resolve: (root, args, context) =>
+          withCurrentUser(context).then((u) => {
+            return updateUser(args, u);
+          }),
+      },
+      loginUser: {
+        type: session,
+        args: loginUserArgs,
+        resolve: (root, args) => loginUser(args),
+      },
+      signUpUser: {
+        type: session,
+        args: signUpUserArgs,
+        resolve: (root, args) => signUpUser(args),
+      },
+    },
   }),
   query: new GraphQLObjectType({
     name: "RootQueryType",
@@ -26,14 +47,17 @@ const schema = new GraphQLSchema({
       users: {
         type: new GraphQLList(user),
         args: defaultArgs,
-        resolve: defaultResolver(User)
+        resolve: defaultResolver(User),
       },
-      my: {
+      me: {
         type: user,
-        resolve: (root, args, context, info) => context.user
-      }
-    }
-  })
+        resolve: (root, args, context) =>
+          withCurrentUser(context).then((u) => {
+            return u;
+          }),
+      },
+    },
+  }),
 });
 
 export default schema;

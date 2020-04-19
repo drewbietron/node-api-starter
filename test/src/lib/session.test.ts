@@ -1,4 +1,4 @@
-import Session from "../../../src/server/middleware/session";
+import Session from "../../../src/lib/session";
 import createUser from "../../fabricators/user";
 import User from "../../../src/database/models/user";
 

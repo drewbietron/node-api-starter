@@ -7,6 +7,7 @@
 // you will need to create a `.env.production` file that has the production
 // environment variables set.  That file is not checked into Git.
 import Environment from "../environment";
+
 new Environment(process.env.NODE_ENV).init();
 
 module.exports = {
@@ -20,6 +21,7 @@ module.exports = {
   }
 };
 
+// eslint-disable-next-line no-console
 console.log(
   `CLI is using ${process.env.DATABASE_URL} in NODE_ENV=${process.env.NODE_ENV}`
 );

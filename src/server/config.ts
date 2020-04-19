@@ -10,13 +10,13 @@ import { resolver } from "graphql-sequelize";
 // Routes
 import index from "./routes/index";
 import health from "./routes/health";
+import session from "./routes/session";
 
 // Graphql Schema
 import schema from "../graphql/schema";
 
 // Middlewares
-// import Authentication from "./middleware/authentication";
-import Session from "./middleware/session";
+import Authentication from "./middleware/authentication";
 import database from "../database/database";
 
 // Set up environment variables
@@ -43,39 +43,34 @@ app.use(errorHandler());
 /*
  * GraphQL
  */
-const graphql = new ApolloServer({
+export const apolloConfig = {
   schema,
   playground: true,
   introspection: true,
   context: async ({ req }) => {
-    const token = req.headers.authorization || "";
-    console.log("token", token);
-    const user = await new Session({
-      token
-    }).currentUser();
-
     // https://github.com/mickhansen/graphql-sequelize/issues/656
     const dataloader = createContext(database);
     resolver.contextToOptions = {
       ...resolver.contextToOptions,
-      dataloader: [EXPECTED_OPTIONS_KEY]
+      dataloader: [EXPECTED_OPTIONS_KEY],
     };
 
     return {
-      user,
-      dataloader
+      headers: req.headers,
+      dataloader,
     };
   },
   engine: {
-    apiKey: process.env.APOLLO_ENGINE_API_KEY
-  }
-});
+    apiKey: process.env.APOLLO_ENGINE_API_KEY,
+  },
+};
+export const graphql = new ApolloServer(apolloConfig);
 graphql.applyMiddleware({ app, path: "/__gql__" });
 // Set up authenicated requests.  Routes that need to be authenicated
 // can be added within middlewares/authentication
-// app.all("*", (req, res, next) =>
-//   new Authentication({ req, res, next }).authenticate()
-// );
+app.all("*", (req, res, next) =>
+  new Authentication({ req, res, next }).authenticate()
+);
 
 /*
  * Primary app routes.
@@ -83,5 +78,10 @@ graphql.applyMiddleware({ app, path: "/__gql__" });
 
 app.get("/", index);
 app.get("/_health", health);
+
+app.post("/session/login", session.login);
+app.post("/session/signup", session.signUp);
+app.post("/session/password-reset", session.passwordReset);
+app.get("/session/validate", session.validateSession);
 
 export default app;

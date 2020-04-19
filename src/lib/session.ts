@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-import User from "../../database/models/user";
+import User from "../database/models/user";
 
 interface ISessionOptions {
   user?: User;

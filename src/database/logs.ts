@@ -15,11 +15,9 @@ const myFormat = printf(({ level, message, meta }) => {
 const logger = winston.createLogger({
   level: "info",
   format: combine(colorize(), timestamp(), splat(), myFormat),
-  transports: [new winston.transports.Console()]
+  transports: [new winston.transports.Console()],
 });
 
 export default function databaseLogger(message: string) {
-  if (message.includes('"users" AS "User"')) return null;
-
   return logger.info(`${colors.cyan(sqlFormatter.format(message))}\n`);
 }
