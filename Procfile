@@ -1,2 +1,2 @@
 release: make
-web: node src/index.ts
+web: yarn start

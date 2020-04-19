@@ -8,12 +8,12 @@ ifeq ($(OS),Darwin) # Mac OS X
   FIND = gfind
 endif
 
-all: install-dependencies run-migrations
+all: run-migrations
 
 # If you add more commands here, make sure that they are all ran.  Heroku postbuild command is in root Procfile
-install-dependencies:
-	@echo "Installing dependencies"
-	@yarn install && yarn global add sequelize-cli && yarn global add ts-node;
+# install-dependencies:
+# 	@echo "Installing dependencies"
+# 	@yarn global add sequelize-cli && yarn global add ts-node;
 
 run-migrations:
 	@echo "Running migrations"
