@@ -1,7 +1,7 @@
 import {
   GraphQLString,
   GraphQLFieldConfigArgumentMap,
-  GraphQLNonNull
+  GraphQLNonNull,
 } from "graphql";
 import { ApolloError } from "apollo-server-core";
 
@@ -11,26 +11,26 @@ import Session from "../../lib/session";
 
 export const loginUserArgs: GraphQLFieldConfigArgumentMap = {
   email: {
-    type: new GraphQLNonNull(GraphQLString)
+    type: new GraphQLNonNull(GraphQLString),
   },
   password: {
-    type: new GraphQLNonNull(GraphQLString)
-  }
+    type: new GraphQLNonNull(GraphQLString),
+  },
 };
 
 export const signUpUserArgs: GraphQLFieldConfigArgumentMap = {
   firstName: {
-    type: new GraphQLNonNull(GraphQLString)
+    type: new GraphQLNonNull(GraphQLString),
   },
   lastName: {
-    type: new GraphQLNonNull(GraphQLString)
+    type: new GraphQLNonNull(GraphQLString),
   },
   email: {
-    type: new GraphQLNonNull(GraphQLString)
+    type: new GraphQLNonNull(GraphQLString),
   },
   password: {
-    type: new GraphQLNonNull(GraphQLString)
-  }
+    type: new GraphQLNonNull(GraphQLString),
+  },
 };
 
 export async function loginUser(args) {
@@ -54,7 +54,7 @@ export async function loginUser(args) {
 
     return {
       token,
-      user: currentUser
+      user: currentUser,
     };
   } catch (e) {
     throw new ApolloError(e, "500");
@@ -77,7 +77,7 @@ export async function signUpUser(args) {
 
       return {
         token,
-        user: currentUser
+        user: currentUser,
       };
     }
 
@@ -92,16 +92,16 @@ export async function signUpUser(args) {
       firstName: args.firstName,
       lastName: args.lastName,
       email: args.email,
-      password: args.password
+      password: args.password,
     });
 
     const userSession = await new Session({ user });
     const token = await userSession.generateToken();
-    const currentUser = await userSession.currentUser(existingUser.uuid);
+    const currentUser = await userSession.currentUser(user.uuid);
 
     return {
       token,
-      user: currentUser
+      user: currentUser,
     };
   } catch (e) {
     throw new ApolloError(e, "401");

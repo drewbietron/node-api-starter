@@ -16,7 +16,7 @@ import session from "./routes/session";
 import schema from "../graphql/schema";
 
 // Middlewares
-// import Authentication from "./middleware/authentication";
+import Authentication from "./middleware/authentication";
 import Session from "../lib/session";
 import database from "../database/database";
 
@@ -49,33 +49,38 @@ const graphql = new ApolloServer({
   playground: true,
   introspection: true,
   context: async ({ req }) => {
-    const token = req.headers.authorization || "";
-    const user = await new Session({
-      token
-    }).currentUser();
+    // const token = req.headers.authorization || "";
+    // let user;
+
+    // if (!user) {
+    //   user = await new Session({
+    //     token,
+    //   }).currentUser();
+    // }
 
     // https://github.com/mickhansen/graphql-sequelize/issues/656
     const dataloader = createContext(database);
     resolver.contextToOptions = {
       ...resolver.contextToOptions,
-      dataloader: [EXPECTED_OPTIONS_KEY]
+      dataloader: [EXPECTED_OPTIONS_KEY],
     };
 
     return {
-      user,
-      dataloader
+      // user,
+      headers: req.headers,
+      dataloader,
     };
   },
   engine: {
-    apiKey: process.env.APOLLO_ENGINE_API_KEY
-  }
+    apiKey: process.env.APOLLO_ENGINE_API_KEY,
+  },
 });
 graphql.applyMiddleware({ app, path: "/__gql__" });
 // Set up authenicated requests.  Routes that need to be authenicated
 // can be added within middlewares/authentication
-// app.all("*", (req, res, next) =>
-//   new Authentication({ req, res, next }).authenticate()
-// );
+app.all("*", (req, res, next) =>
+  new Authentication({ req, res, next }).authenticate()
+);
 
 /*
  * Primary app routes.
