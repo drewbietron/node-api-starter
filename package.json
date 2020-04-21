@@ -4,7 +4,8 @@
   "description": "Starter kit for a Node.js API with Express, GraphQL and Sequelize",
   "main": "index.ts",
   "scripts": {
-    "heroku-build": "echo 'running yarn heroku-build'; rm -rf dist; node_modules/typescript/bin/tsc --p ./typescript/production.json;",
+    "heroku-prebuild": "echo 'running heroku pre-build';yarn install; yarn build;",
+    "build": "echo 'running yarn build'; rm -rf dist; node_modules/typescript/bin/tsc --p ./typescript/production.json;",
     "lint": "node_modules/.bin/eslint src/**/**/*.ts test/**/**/*.ts",
     "start": "node dist/index.js",
     "start-dev": "ts-node-dev src/index.ts --watch",
