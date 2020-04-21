@@ -17,7 +17,7 @@ install:
 
 install:
 	@echo "Building app" 
-	@yarn build;
+	@yarn heroku-build;
 
 run-migrations:
 	@echo "Running migrations"
