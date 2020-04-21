@@ -1,2 +1,2 @@
-release: make run-migrations
+release: yarn run-migrations
 web: yarn start

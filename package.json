@@ -4,11 +4,11 @@
   "description": "Starter kit for a Node.js API with Express, GraphQL and Sequelize",
   "main": "index.ts",
   "scripts": {
-    "heroku-build": "node_modules/.bin/tsc --p ./typescript/production.json;",
+    "build": "rm -rf dist; ./node_modules/typescript/bin/tsc --p ./typescript/production.json;",
     "lint": "node_modules/.bin/eslint src/**/**/*.ts test/**/**/*.ts",
     "start": "node dist/index.js",
     "start-dev": "ts-node-dev src/index.ts --watch",
-    "db": "sequelize --config=dist/database/config-cli.js",
+    "db": "node_modules/.bin/sequelize-cli --config=dist/database/config-cli.js",
     "pretest": "rm -rf dist/; NODE_ENV=test node_modules/typescript/bin/tsc; NODE_ENV=test yarn db db:drop; NODE_ENV=test yarn db db:create; NODE_ENV=test yarn run-migrations;",
     "test": "yarn lint; jest --forceExit --coverage --verbose --detectOpenHandles --runInBand",
     "run-migrations": "yarn db db:migrate",
@@ -37,7 +37,9 @@
     "morgan": "^1.9.1",
     "pg": "^7.18.1",
     "sequelize": "^5.21.4",
+    "sequelize-cli": "^5.5.1",
     "sql-formatter": "^2.3.3",
+    "typescript": "^3.7.5",
     "uuid": "^3.4.0",
     "winston": "^3.2.1"
   },
@@ -61,11 +63,9 @@
     "graphql-tools": "^5.0.0",
     "jest": "^25.1.0",
     "jest-express": "^1.11.0",
-    "sequelize-cli": "^5.5.1",
     "supertest": "^4.0.2",
     "ts-jest": "^25.2.0",
     "ts-node": "^8.6.2",
-    "ts-node-dev": "^1.0.0-pre.44",
-    "typescript": "^3.7.5"
+    "ts-node-dev": "^1.0.0-pre.44"
   }
 }
