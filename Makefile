@@ -8,12 +8,12 @@ ifeq ($(OS),Darwin) # Mac OS X
   FIND = gfind
 endif
 
-all: run-migrations
+all: pre-build run-migrations
 
 # If you add more commands here, make sure that they are all ran.  Heroku postbuild command is in root Procfile
 pre-build:
-	@echo "Running prebuild, installing dependencies"
-	@yarn install && yarn build;
+	@echo "Installing dependencies"
+	@yarn install;
 
 # install:
 # 	@echo "Building app" 
