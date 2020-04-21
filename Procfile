@@ -1,2 +1,2 @@
-release: yarn heroku-release
+release: make run-migrations
 web: yarn start
