@@ -15,10 +15,6 @@ pre-build:
 	@echo "Installing dependencies"
 	@yarn install;
 
-# install:
-# 	@echo "Building app" 
-# 	@yarn heroku-build;
-
 run-migrations:
 	@echo "Running migrations"
-	@yarn run-migrations;
+	@yarn global add sequelize-cli && yarn run-migrations;
