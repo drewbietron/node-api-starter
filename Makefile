@@ -11,9 +11,9 @@ endif
 all: run-migrations
 
 # If you add more commands here, make sure that they are all ran.  Heroku postbuild command is in root Procfile
-# install:
-# 	@echo "Installing dependencies"
-# 	@yarn install;
+pre-build:
+	@echo "Running prebuild, installing dependencies"
+	@yarn install && yarn build;
 
 # install:
 # 	@echo "Building app" 
