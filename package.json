@@ -10,7 +10,7 @@
     "lint": "node_modules/.bin/eslint src/**/**/*.ts test/**/**/*.ts",
     "start": "node dist/index.js",
     "start-dev": "ts-node-dev src/index.ts --watch",
-    "db": "node_modules/.bin/sequelize-cli --config=dist/database/config-cli.js",
+    "db": "sequelize --config=dist/database/config-cli.js",
     "pretest": "rm -rf dist/; NODE_ENV=test node_modules/typescript/bin/tsc; NODE_ENV=test yarn db db:drop; NODE_ENV=test yarn db db:create; NODE_ENV=test yarn run-migrations;",
     "test": "yarn lint; jest --forceExit --coverage --verbose --detectOpenHandles --runInBand",
     "run-migrations": "yarn db db:migrate",
