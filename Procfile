@@ -1,2 +1,2 @@
-release: make
-web: node api/dist/server.js
+release: yarn run-migrations
+web: yarn start
