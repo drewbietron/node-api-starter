@@ -4,7 +4,7 @@ import Email, { EEmailTemplates } from "../../../src/lib/email";
 
 describe("Email", () => {
   const mailDataDefaults = {
-    from: "Node API Starter<no-reply@node-api-starter.com>"
+    from: "Node API Starter<no-reply@node-api-starter.com>",
   };
 
   function describedClass(
@@ -26,18 +26,18 @@ describe("Email", () => {
         .then(() => {
           expect(sendgrid.send).toHaveBeenCalledWith({
             ...mailDataDefaults,
-            from: "Node API Starter<no-reply@node-api-starter.com>"
+            from: "Node API Starter<no-reply@node-api-starter.com>",
           });
         });
     });
 
-    it("always sends as Crowler", async () => {
+    it("always sends as Node API Starter", async () => {
       await describedClass({ from: "yomomma.com" })
         .send()
         .then(() => {
           expect(sendgrid.send).toHaveBeenCalledWith({
             ...mailDataDefaults,
-            from: "Node API Starter<no-reply@node-api-starter.com>"
+            from: "Node API Starter<no-reply@node-api-starter.com>",
           });
         });
     });
@@ -50,7 +50,7 @@ describe("Email", () => {
         .then(() => {
           expect(sendgrid.send).toHaveBeenCalledWith({
             ...mailDataDefaults,
-            templateId: EEmailTemplates.RESET_PASSWORD
+            templateId: EEmailTemplates.RESET_PASSWORD,
           });
         });
     });

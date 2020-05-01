@@ -121,7 +121,21 @@ async function passwordReset(req: Request, res: Response) {
     return res.status(401).json({ error: "Please enter an e-mail" });
   }
 
-  return new PasswordReset({ req, res }).sendEmail();
+  try {
+    const reset = new PasswordReset(req.body.email).sendEmail();
+
+    if (reset) {
+      return res
+        .status(201)
+        .json(
+          "Check your email for instructions to reset your password. Don't forget to check your spam folder, and un-spam filter us if we're in there. 😉"
+        );
+    }
+
+    return res.status(500).json();
+  } catch (e) {
+    return res.status(500).json(e);
+  }
 }
 
 export default { login, signUp, validateSession, passwordReset };

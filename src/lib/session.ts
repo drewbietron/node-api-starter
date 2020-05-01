@@ -18,7 +18,7 @@ export default class Session {
     try {
       return jwt.sign(
         {
-          data: this.options.user.uuid
+          data: this.options.user.uuid,
         },
         process.env.JWT_SECRET,
         { expiresIn: "1y" }
@@ -42,8 +42,8 @@ export default class Session {
       try {
         return await User.findByPk(userUuid, {
           attributes: {
-            exclude: ["password"]
-          }
+            exclude: ["password"],
+          },
         });
       } catch {
         return null;
