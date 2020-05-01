@@ -3,7 +3,7 @@ module.exports = {
     {
       name: "node-api-starter",
       script: "./dist/index.js",
-      instances: "max",
+      instances: "1X",
       env: {
         NODE_ENV: "development",
       },
