@@ -30,11 +30,11 @@ User.init(
   {
     createdAt: {
       type: Sequelize.DATE,
-      field: "created_at"
+      field: "created_at",
     },
     updatedAt: {
       type: Sequelize.DATE,
-      field: "updated_at"
+      field: "updated_at",
     },
     uuid: {
       type: Sequelize.UUIDV4,
@@ -42,25 +42,25 @@ User.init(
       allowNull: false,
       defaultValue: () => uuid(),
       validate: {
-        isUUID: 4
-      }
+        isUUID: 4,
+      },
     },
     email: {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
-        isEmail: true
-      }
+        isEmail: true,
+      },
     },
     firstName: {
       type: Sequelize.STRING,
       field: "first_name",
-      allowNull: false
+      allowNull: false,
     },
     lastName: {
       type: Sequelize.STRING,
       field: "last_name",
-      allowNull: false
+      allowNull: false,
     },
     password: {
       type: Sequelize.STRING,
@@ -68,16 +68,16 @@ User.init(
       validate: {
         len: {
           args: [8, 256],
-          msg: "Password must be at least 8 charcters"
-        }
-      }
-    }
+          msg: "Password must be at least 8 charcters",
+        },
+      },
+    },
   },
   {
     sequelize: database,
     timestamps: true,
     underscored: true,
-    tableName: "users"
+    tableName: "users",
   }
 );
 

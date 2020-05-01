@@ -3,7 +3,7 @@ import { MailData, MailDataRequired } from "@sendgrid/helpers/classes/mail";
 
 export enum EEmailTemplates {
   RESET_PASSWORD = "d-97887a882dc7480b83ead59d935e7b1f",
-  WELCOME_EMAIL = "d-216b36a2ef584fc3a4441c76c997c0c7"
+  WELCOME_EMAIL = "d-216b36a2ef584fc3a4441c76c997c0c7",
 }
 
 // There's a bug on the sendgrid TS types and `dynamicTemplateData`
@@ -34,7 +34,12 @@ export default class Email {
   }
 
   public send() {
-    if (!process.env.SENDGRID_API_KEY) return null;
+    if (!process.env.SENDGRID_API_KEY) {
+      console.info(
+        "No Sendgrid API set.  Set environment variable SENDGRID_API_KEY to send emails using Sendgrid."
+      );
+      return null;
+    }
 
     return sendgrid.send(this.emailToSend);
   }
@@ -47,7 +52,7 @@ export default class Email {
     return {
       ...this.mailData,
       from: "Node API Starter<no-reply@node-api-starter.com>",
-      templateId: this.templateId
+      templateId: this.templateId,
     };
   }
 }

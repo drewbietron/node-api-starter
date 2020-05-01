@@ -8,6 +8,7 @@ import { ApolloError } from "apollo-server-core";
 import User from "../../database/models/user";
 import ValidateUserCredentials from "../../lib/validate-user-credentials";
 import Session from "../../lib/session";
+import PasswordReset from "../../lib/password-reset";
 
 export const loginUserArgs: GraphQLFieldConfigArgumentMap = {
   email: {
@@ -29,6 +30,12 @@ export const signUpUserArgs: GraphQLFieldConfigArgumentMap = {
     type: new GraphQLNonNull(GraphQLString),
   },
   password: {
+    type: new GraphQLNonNull(GraphQLString),
+  },
+};
+
+export const resetUserPasswordArgs: GraphQLFieldConfigArgumentMap = {
+  email: {
     type: new GraphQLNonNull(GraphQLString),
   },
 };
@@ -105,5 +112,17 @@ export async function signUpUser(args) {
     };
   } catch (e) {
     throw new ApolloError(e, "401");
+  }
+}
+
+export async function resetUserPassword(args) {
+  try {
+    await new PasswordReset(args.email).sendEmail();
+
+    return {
+      status: "sent",
+    };
+  } catch (e) {
+    throw new ApolloError(e, "500");
   }
 }

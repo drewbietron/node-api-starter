@@ -3,6 +3,7 @@ import { GraphQLObjectType, GraphQLList, GraphQLSchema } from "graphql";
 import User from "../database/models/user";
 
 import user from "./nodes/user";
+import statusResponse from "./nodes/statusResponse";
 
 import defaultArgs from "./inputs/index";
 import defaultResolver from "./resolvers/index";
@@ -13,6 +14,8 @@ import {
   loginUser,
   signUpUserArgs,
   signUpUser,
+  resetUserPasswordArgs,
+  resetUserPassword,
 } from "./mutations/session";
 import { session } from "./nodes/session";
 import withCurrentUser from "./resolvers/authenticated";
@@ -38,6 +41,11 @@ const schema = new GraphQLSchema({
         type: session,
         args: signUpUserArgs,
         resolve: (root, args) => signUpUser(args),
+      },
+      resetUserPassword: {
+        type: statusResponse,
+        args: resetUserPasswordArgs,
+        resolve: (root, args) => resetUserPassword(args),
       },
     },
   }),
