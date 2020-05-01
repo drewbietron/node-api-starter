@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf dist; ./node_modules/typescript/bin/tsc --p ./typescript/production.json;",
     "lint": "node_modules/.bin/eslint src/**/**/*.ts test/**/**/*.ts",
-    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "start": "node start dist/index.js",
     "start-dev": "ts-node-dev src/index.ts --watch",
     "db": "node_modules/.bin/sequelize-cli --config=dist/database/config-cli.js",
     "pretest": "rm -rf dist/; NODE_ENV=test node_modules/typescript/bin/tsc; NODE_ENV=test yarn db db:drop; NODE_ENV=test yarn db db:create; NODE_ENV=test yarn run-migrations;",
@@ -36,7 +36,6 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "pg": "^7.18.1",
-    "pm2": "^4.4.0",
     "sequelize": "^5.21.4",
     "sequelize-cli": "^5.5.1",
     "sql-formatter": "^2.3.3",
