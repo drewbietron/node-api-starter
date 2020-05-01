@@ -28,11 +28,7 @@ export default class PasswordReset {
 
       return true;
     } catch (error) {
-      if (error.status === 404) {
-        throw new Error(error.message);
-      }
-
-      throw new Error(error);
+      throw new Error(error.message);
     }
   }
 
