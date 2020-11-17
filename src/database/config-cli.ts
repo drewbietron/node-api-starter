@@ -16,9 +16,9 @@ module.exports = {
     dialect: "postgres",
     ssl: ["production", "staging"].includes(process.env.NODE_ENV),
     dialectOptions: {
-      ssl: ["production", "staging"].includes(process.env.NODE_ENV)
-    }
-  }
+      ssl: ["production", "staging"].includes(process.env.NODE_ENV),
+    },
+  },
 };
 
 // eslint-disable-next-line no-console

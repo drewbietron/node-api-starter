@@ -9,7 +9,7 @@ export interface IDefaultModel {
 }
 
 export const database = new Sequelize(config.url, {
-  ...configOptions
+  ...configOptions,
 });
 
 export default database;

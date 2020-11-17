@@ -5,7 +5,7 @@ import databaseLogger from "./logs";
 new Environment(process.env.NODE_ENV).init();
 
 export const configOptions: Sequelize.Options = {
-  host: process.env.DATABASE_HOST,
+  host: process.env.DATABASE_URL,
   dialect: "postgres",
   ssl: ["production", "staging"].includes(process.env.NODE_ENV),
   dialectOptions: {

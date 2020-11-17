@@ -9,7 +9,7 @@ import { resolver } from "graphql-sequelize";
 
 // Routes
 import index from "./routes/index";
-import health from "./routes/health";
+import health, { databaseCheck } from "./routes/health";
 import session from "./routes/session";
 
 // Graphql Schema
@@ -78,6 +78,7 @@ app.all("*", (req, res, next) =>
 
 app.get("/", index);
 app.get("/_health", health);
+app.get("/_health/database", databaseCheck);
 
 app.post("/session/login", session.login);
 app.post("/session/signup", session.signUp);
