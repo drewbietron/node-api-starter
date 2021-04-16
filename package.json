@@ -13,8 +13,8 @@
     "test": "yarn lint; jest --forceExit --coverage --verbose --detectOpenHandles --runInBand",
     "run-migrations": "yarn db db:migrate",
     "seed-database": "node_modules/ts-node/dist/bin.js test/fabricators/seed.ts;",
-    "setup-database": "yarn docker; yarn build; NODE_ENV=development yarn db db:create; NODE_ENV=development yarn run-migrations; yarn seed-database;",
-    "docker": "docker run --rm -P -p 127.0.0.1:5432:5432 -e POSTGRES_PASSWORD='1234' --name pg postgres:alpine"
+    "setup-database": "yarn build; NODE_ENV=development yarn db db:drop; NODE_ENV=development yarn db db:create; NODE_ENV=development yarn run-migrations; yarn seed-database;",
+    "docker": "docker run --rm -P -p 127.0.0.1:5432:5432 -e POSTGRES_PASSWORD='password' --name pg postgres:alpine"
   },
   "author": "",
   "license": "ISC",
