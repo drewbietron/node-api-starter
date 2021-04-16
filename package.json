@@ -13,7 +13,8 @@
     "test": "yarn lint; jest --forceExit --coverage --verbose --detectOpenHandles --runInBand",
     "run-migrations": "yarn db db:migrate",
     "seed-database": "node_modules/ts-node/dist/bin.js test/fabricators/seed.ts;",
-    "setup-database": "yarn build; NODE_ENV=development yarn db db:drop; NODE_ENV=development yarn db db:create; NODE_ENV=development yarn run-migrations; yarn seed-database;"
+    "setup-database": "yarn build; NODE_ENV=development yarn db db:drop; NODE_ENV=development yarn db db:create; NODE_ENV=development yarn run-migrations; yarn seed-database;",
+    "docker": "docker run --rm -P -p 127.0.0.1:5432:5432 -e POSTGRES_PASSWORD='password' --name pg postgres:alpine"
   },
   "author": "",
   "license": "ISC",
@@ -37,8 +38,8 @@
     "morgan": "^1.9.1",
     "pg": "^7.18.1",
     "pm2": "^4.4.0",
-    "sequelize": "^5.21.4",
-    "sequelize-cli": "^5.5.1",
+    "sequelize": "5.21.6",
+    "sequelize-cli": "5.5.1",
     "sql-formatter": "^2.3.3",
     "typescript": "^3.7.5",
     "uuid": "^3.4.0",
