@@ -10,8 +10,8 @@ jobs:
       - image: mdillon/postgis:9.5
         environment:
           POSTGRES_DB: api_starter_test
-          POSTGRES_PASSWORD: ""
-          POSTGRES_USER: user
+          POSTGRES_PASSWORD: "password"
+          POSTGRES_USER: postgres 
           JTW_SECRET: secret
     steps:
       - checkout
