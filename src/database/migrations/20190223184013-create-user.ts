@@ -7,41 +7,41 @@ export const createUser = {
         id: {
           allowNull: false,
           type: Sequelize.INTEGER,
-          autoIncrement: true
+          autoIncrement: true,
         },
         uuid: {
           allowNull: false,
           primaryKey: true,
-          type: Sequelize.UUID
+          type: Sequelize.STRING,
         },
         created_at: {
           allowNull: false,
-          type: Sequelize.DATE
+          type: Sequelize.DATE,
         },
         updated_at: {
           allowNull: false,
-          type: Sequelize.DATE
+          type: Sequelize.DATE,
         },
         first_name: {
-          type: Sequelize.STRING
+          type: Sequelize.STRING,
         },
         last_name: {
-          type: Sequelize.STRING
+          type: Sequelize.STRING,
         },
         email: {
           type: Sequelize.STRING,
           allowNull: false,
-          unique: true
+          unique: true,
         },
         password: {
-          type: Sequelize.STRING
-        }
-      })
+          type: Sequelize.STRING,
+        },
+      }),
     ]);
   },
   down: (queryInterface: Sequelize.QueryInterface) => {
     return Promise.all([queryInterface.dropTable("users")]);
-  }
+  },
 };
 
 export default createUser;

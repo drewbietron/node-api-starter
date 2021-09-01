@@ -1,5 +1,5 @@
 import Sequelize, { Model } from "sequelize";
-import uuid from "uuid/v4";
+import { nanoid } from "nanoid";
 import bcrypt from "bcrypt";
 
 import database, { IDefaultModel } from "../database";
@@ -37,13 +37,10 @@ User.init(
       field: "updated_at",
     },
     uuid: {
-      type: Sequelize.UUIDV4,
+      type: Sequelize.STRING,
       primaryKey: true,
       allowNull: false,
-      defaultValue: () => uuid(),
-      validate: {
-        isUUID: 4,
-      },
+      defaultValue: () => nanoid(),
     },
     email: {
       type: Sequelize.STRING,
