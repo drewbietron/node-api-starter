@@ -21,7 +21,7 @@
   "dependencies": {
     "@sendgrid/helpers": "^7.0.0",
     "@sendgrid/mail": "^7.0.0",
-    "apollo-server-core": "2.10.0",
+    "apollo-server-core": "2.14.2",
     "apollo-server-express": "2.14.2",
     "bcrypt": "^3.0.8",
     "body-parser": "^1.19.0",
